@@ -1,0 +1,42 @@
+.minesweeper-field {
+  margin: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center; }
+  .minesweeper-field.disabled {
+    pointer-events: none; }
+  .minesweeper-field h2 {
+    margin: 10px 0;
+    color: #eee; }
+  .minesweeper-field .info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center; }
+  .minesweeper-field .row {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center; }
+    .minesweeper-field .row .cell {
+      width: 40px;
+      height: 40px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 2em;
+      background-color: #333;
+      color: #333;
+      transition: all .5s ease;
+      border: solid 2px #000;
+      cursor: pointer;
+      user-select: none; }
+      .minesweeper-field .row .cell.revealed {
+        background-color: #eee;
+        cursor: default; }
+      .minesweeper-field .row .cell.flagged {
+        color: red; }
+      .minesweeper-field .row .cell.unknown {
+        color: #eee;
+        background-color: purple; }
