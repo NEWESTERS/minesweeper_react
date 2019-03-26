@@ -17,7 +17,8 @@ interface IState {
     boardState: Array<Array<CellState>>,
     minesRemaining: number,
     cellsRemeining: number,
-    gameResult: GameResult
+    gameResult: GameResult,
+    clickMode: "reveal" | "mark"
 }
 
 export default class Minesweeper extends React.Component<IProps, IState> {
@@ -26,7 +27,8 @@ export default class Minesweeper extends React.Component<IProps, IState> {
         boardState: [],
         minesRemaining: 0,
         cellsRemeining: 0,
-        gameResult: "IN PROGRESS"
+        gameResult: "IN PROGRESS",
+        clickMode: "reveal"
     }
 
     componentDidMount() {
@@ -94,13 +96,21 @@ export default class Minesweeper extends React.Component<IProps, IState> {
     onCellСlick = (e: React.MouseEvent<HTMLDivElement>, rowIndex: number, columnIndex: number) => {
         const boardState = [ ...this.state.boardState.map(row => [ ...row ]) ];
 
-        switch(e.button) {
-            case 0:
-                this.revealCell(boardState, rowIndex, columnIndex);
+        switch(this.state.clickMode) {
+            case "reveal":
+                switch(e.button) {
+                    case 0:
+                        this.revealCell(boardState, rowIndex, columnIndex);
+                        break;
+
+                    case 2:
+                        e.preventDefault();
+                        this.markCell(boardState, rowIndex, columnIndex);
+                        break;
+                }
                 break;
 
-            case 2:
-                e.preventDefault();
+            case "mark":
                 this.markCell(boardState, rowIndex, columnIndex);
                 break;
         }
@@ -140,8 +150,11 @@ export default class Minesweeper extends React.Component<IProps, IState> {
         const { boardValues } = this.state,
             { columns, rows } = this.props;
 
+        if(boardState[rowIndex][columnIndex] !== "C") return;
+
         boardState[rowIndex][columnIndex] = "R";
         this.setState(({ cellsRemeining }) => ({ cellsRemeining: cellsRemeining - 1 }));
+
         if(boardValues[rowIndex][columnIndex] == "M") {
             this.gameOver();
         } else if(boardValues[rowIndex][columnIndex] === 0) {
@@ -172,8 +185,19 @@ export default class Minesweeper extends React.Component<IProps, IState> {
     }
 
     gameOver = () => {
-        alert("Проiграв");
         this.setState({ gameResult: "LOSE" })
+    }
+
+    switchClickMode = () => {
+        this.setState(({ clickMode }) => {
+            switch(clickMode) {
+                case "reveal":
+                    return { clickMode: "mark" };
+
+                case "mark":
+                    return { clickMode: "reveal" };
+            }
+        })
     }
 
     componentDidUpdate() {
@@ -183,13 +207,14 @@ export default class Minesweeper extends React.Component<IProps, IState> {
     }
 
     render() {
-        const { boardValues, boardState, minesRemaining, cellsRemeining, gameResult } = this.state;
+        const { boardValues, boardState, minesRemaining, cellsRemeining, gameResult, clickMode } = this.state;
 
         return(
             <div className={`minesweeper-field${ gameResult == "LOSE" || gameResult == "WIN" ? " disabled" : "" }`}>
                 <div className="info">
                     <h2>Осталось мин: { minesRemaining }</h2>
                     <h2>Осталось клеток: { cellsRemeining }</h2>
+                    <div className={ `switch-mode ${ clickMode }` } onClick={ this.switchClickMode } />
                 </div>
 
                 {
