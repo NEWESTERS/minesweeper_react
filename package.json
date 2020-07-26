@@ -4,6 +4,8 @@
 	"homepage": "http://newesters.github.io/minesweeper_react",
 	"private": true,
 	"dependencies": {
+		"bem-cn": "^3.0.1",
+		"immutable": "^4.0.0-rc.12",
 		"react": "^16.13.1",
 		"react-dom": "^16.13.1"
 	},
