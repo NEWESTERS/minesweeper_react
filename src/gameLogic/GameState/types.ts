@@ -1,8 +1,6 @@
 import { List as ImmutableList, Map as ImmutableMap } from 'immutable';
 
-import { CellData, CellState } from '../../model/Cell';
-
-export type CellId = string;
+import { CellData, CellState, CellId } from '../../model/Cell';
 
 export type CellRow = ImmutableList<CellId>;
 
