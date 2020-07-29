@@ -1,0 +1,18 @@
+.game-cell {
+	background-color: #333;
+	transition: background-color 0.3s ease;
+
+	&_state {
+		&_revealed {
+			background-color: #eee;
+		}
+
+		&_flagged {
+			background-color: #999;
+		}
+
+		&_unknown {
+			background-color: #666;
+		}
+	}
+}
