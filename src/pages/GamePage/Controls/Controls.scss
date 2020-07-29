@@ -1,0 +1,10 @@
+@import '../../../styles/fonts';
+
+.controls {
+	&__switch-button {
+		background-color: white;
+		border: none;
+		cursor: pointer;
+		@include font-regular(26px);
+	}
+}

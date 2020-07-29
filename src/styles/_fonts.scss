@@ -1,0 +1,11 @@
+@mixin font-regular($font-size) {
+	font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+	font-size: $font-size;
+	font-weight: 400;
+}
+
+@mixin font-bold($font-size) {
+	font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+	font-size: $font-size;
+	font-weight: 600;
+}

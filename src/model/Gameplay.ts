@@ -4,3 +4,8 @@ export enum GamePhase {
 	Won,
 	Lost,
 }
+
+export enum MainInteractionMode {
+	Activate,
+	Mark,
+}
