@@ -10,7 +10,7 @@
 		"react-dom": "^16.13.1"
 	},
 	"scripts": {
-		"start": "parcel src/index.html",
+		"start": "parcel src/index.html --port 3000",
 		"build": "parcel build src/index.html -d build",
 		"predeploy": "parcel build src/index.html -d build --public-url /minesweeper_react --no-content-hash",
 		"deploy": "gh-pages -d build"

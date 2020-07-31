@@ -4,8 +4,9 @@ import { block } from 'bem-cn';
 import { GameProvider } from '../../gameLogic';
 import { Statistics } from './Statistics';
 import { GameField } from './GameField';
-import './GamePage.scss';
 import { Controls } from './Controls';
+import { GameResult } from './GameResult';
+import './GamePage.scss';
 
 const cn = block('game-page');
 
@@ -18,9 +19,15 @@ const GamePage: FC<Props> = props => {
 
 	return (
 		<GameProvider width={30} height={30} mineCount={150}>
+			<GameResult />
+
 			<div className={cn.mix(className)}>
-				<Statistics />
-				<Controls />
+				<div className={cn('header')}>
+					<Statistics />
+
+					<Controls />
+				</div>
+
 				<GameField />
 			</div>
 		</GameProvider>

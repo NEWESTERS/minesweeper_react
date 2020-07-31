@@ -1,8 +1,10 @@
 .game-field {
 	width: 100%;
-	height: 500px;
+	height: 90vh;
 	overflow: auto;
 	position: relative;
+	border: solid 1px #222;
+	box-sizing: border-box;
 
 	&__grid {
 		position: absolute;

@@ -164,6 +164,11 @@ class GameState {
 
 		if (this.getCellData(cellId) === 'M') {
 			newGameState = newGameState._setGamePhase(GamePhase.Lost);
+		} else if (
+			newGameState.revealedCellCount ===
+			newGameState.width * newGameState.height - newGameState.mineCount
+		) {
+			newGameState = newGameState._setGamePhase(GamePhase.Won);
 		}
 
 		return newGameState;
@@ -231,13 +236,6 @@ class GameState {
 				break;
 		}
 
-		if (
-			newGameState.revealedCellCount ===
-			newGameState.width * newGameState.height - newGameState.mineCount
-		) {
-			newGameState = newGameState._setGamePhase(GamePhase.Won);
-		}
-
 		return newGameState;
 	}
 
@@ -253,6 +251,9 @@ class GameState {
 
 			case CellState.Unknown:
 				return this._setCellState(cellId, CellState.Closed);
+
+			case CellState.Revealed:
+				return this._activateRevealedCell(cellId);
 
 			default:
 				return this;

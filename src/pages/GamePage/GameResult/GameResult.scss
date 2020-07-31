@@ -1,0 +1,66 @@
+@import '../../../styles/fonts';
+
+.game-result {
+	&__bg {
+		position: fixed;
+		z-index: 1;
+		width: 100vw;
+		height: 100vh;
+		background-color: rgba(0, 0, 0, 0.5);
+		animation: fade-out 0.5s ease forwards;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+
+	&__text {
+		@include font-bold(40px);
+		text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.35);
+
+		&_type {
+			&_won {
+				color: yellow;
+				animation: won-upscale 0.4s ease forwards;
+			}
+
+			&_lost {
+				color: #ba262b;
+				animation: lost-upscale 1s ease forwards;
+			}
+		}
+	}
+}
+
+@keyframes fade-out {
+	0% {
+		opacity: 0;
+	}
+
+	100% {
+		opacity: 1;
+	}
+}
+
+@keyframes won-upscale {
+	0% {
+		transform: scale(0);
+	}
+
+	75% {
+		transform: scale(1.2);
+	}
+
+	100% {
+		transform: scale(1);
+	}
+}
+
+@keyframes lost-upscale {
+	0% {
+		transform: scale(0);
+	}
+
+	100% {
+		transform: scale(1);
+	}
+}
